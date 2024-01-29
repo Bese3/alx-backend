@@ -8,4 +8,5 @@ def index_range(page:int, page_size: int) -> Tuple[int, int]:
     The function `index_range` calculates the starting and
     ending indices for a given page and page size.
     """
-    return ((page - 1) * page_size, page * page_size)
+    start_index = (page - 1) * page_size
+    return (start_index, start_index + page_size)
