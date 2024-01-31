@@ -45,7 +45,7 @@ class LFUCache(BaseCaching):
         self.cache_data[key] = item
         if key not in self.recent_time.keys():
             self.recent_time[key] = 0
-        
+
         self.recent_time[key] += 1
         # self.recent_time[key] = 1
         # print(f"recent time = {self.recent_time}")
