@@ -31,7 +31,7 @@ class MRUCache(BaseCaching):
             lowest = sorted(self.recent_time.values())[0]
             my_key = ""
             for k, v in self.recent_time.items():
-                if v > lowest:
+                if v >= lowest:
                     lowest = v
                     my_key = k
                 # print(my_key)
