@@ -2,7 +2,7 @@
 '''
     Use Babel to get user locale.
 '''
-from flask_babel import Babel
+from flask_babel import Babel, _
 from flask import Flask, render_template, request
 
 
@@ -29,10 +29,13 @@ def helloworld() -> str:
     The function `helloworld` returns the rendered
     template '1-index.html'.
     """
-    return render_template('1-index.html')
+    home_title = _('home_title')
+    home_header = _('home_header')
+    return render_template('3-index.html', home_title=home_title,
+                           home_header=home_header)
 
 
-# @babel.localeselector
+@babel.localeselector
 def get_locale():
     """
     The function `get_locale()` returns the best matching
@@ -40,9 +43,8 @@ def get_locale():
     the configured languages in the application.
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-babel.init_app(app, locale_selector=get_locale)
 
-
+# babel.init_app(app, locale_selector=get_locale)
 
 
 if __name__ == '__main__':
