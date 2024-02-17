@@ -54,10 +54,15 @@ def get_locale() -> str:
     language based on the accepted languages and
     the configured languages in the application.
     """
-    my_locale = request.args.get('locale')
-    if my_locale in app.config['LANGUAGES']:
-        return my_locale
-    if g.user:
+    my_locale = request.args.get('locale', None)
+    try:
+        if my_locale in app.config['LANGUAGES']:
+            return my_locale
+    except Exception:
+        pass
+
+    if g.user and g.user.get('locale',
+                             None) in app.config['LANGUAGES']:
         return g.user.get('locale', None)
 
     return request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -70,7 +75,7 @@ def helloworld() -> str:
     The function `helloworld` returns the rendered
     template '1-index.html'.
     """
-    return render_template('5-index.html', g=g)
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
