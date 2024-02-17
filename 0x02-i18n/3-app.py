@@ -36,7 +36,7 @@ def helloworld() -> str:
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
     The function `get_locale()` returns the best matching
     language based on the accepted languages and
@@ -48,4 +48,4 @@ def get_locale():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
