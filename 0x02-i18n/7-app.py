@@ -79,11 +79,11 @@ def get_timezone():
     timezone = ""
     try:
         if request.args.get('timezone'):
-            timezone = request.args.get('timezone', None)
+            timezone = pytz.timezone(request.args.get('timezone', None))
         elif g.user and g.user['timezone']:
-            timezone = g.user['timezone']
+            timezone = pytz.timezone(g.user['timezone'])
         else:
-            timezone = app.config['BABEL_DEFAULT_TIMEZONE']
+            timezone = pytz.timezone(app.config['BABEL_DEFAULT_TIMEZONE'])
     except pytz.UnknownTimeZoneError:
         pass
     return timezone
@@ -96,7 +96,7 @@ def helloworld() -> str:
     The function `helloworld` returns the rendered
     template '1-index.html'.
     """
-    return render_template('5-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == '__main__':
