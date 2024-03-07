@@ -1,18 +1,18 @@
 #!/usr/bin/node
 
-import { createQueue } from "kue";
 
 function createPushNotificationsJobs(jobs, queue) {
     if(!Array.isArray(jobs)) {
         return new Error('Jobs is not an array')
     }
     for (const i of jobs) {
-        const job = queue.create('push_notification_code_3', i)
-        .save((err) => {
+        const job = queue.create('push_notification_code_3', i);
+
+        job.save((err) => {
             if(!err) {
                 console.log(`Notification job created: ${job.id}`)
             }
-        });
+        })
 
         job.on('complete', () => {
             console.log(`Notification job ${job.id} completed`)
